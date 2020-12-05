@@ -91,7 +91,7 @@
    	</div> <!-- /intro-content --> 
 
    	<ul class="intro-social">        
-         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+         <li><a href="https://m.facebook.com/thakshila.muthumali.1"><i class="fa fa-facebook"></i></a></li>
          <li><a href="#"><i class="fa fa-behance"></i></a></li>
          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
          <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
@@ -986,19 +986,19 @@
       			<fieldset>
 
                   <div class="form-field">
- 						   <input name="contactName" type="text" id="contactName" placeholder="Name" value="" minlength="2" required="">
+ 						   <input name="to_name" type="text" id="to_name" placeholder="Name" value="" minlength="2" required="">
                   </div>
                   <div class="form-field">
-	      			   <input name="contactEmail" type="email" id="contactEmail" placeholder="Email" value="" required="">
+	      			   <input name="from_name" type="email" id="from_name" placeholder="Email" value="" required="">
 	               </div>
                   <div class="form-field">
 	     				   <input name="contactSubject" type="text" id="contactSubject" placeholder="Subject" value="">
 	               </div>                       
                   <div class="form-field">
-	                 	<textarea name="contactMessage" id="contactMessage" placeholder="message" rows="10" cols="50" required=""></textarea>
+	                 	<textarea name="message" id="message" placeholder="message" rows="10" cols="50" required=""></textarea>
 	               </div>                      
                  <div class="form-field">
-                     <button class="submitform">Submit</button>
+                     <button class="submitform" type="submit" id="button" value="Send Email"> Submit</button>
                      <div id="submit-loader">
                         <div class="text-loader">Sending...</div>                             
        				      <div class="s-loader">
@@ -1010,15 +1010,43 @@
                   </div>
 
       			</fieldset>
-      		</form> <!-- Form End -->
+			  </form> <!-- Form End -->
+			  
+			  
+			<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+
+			<script type="text/javascript">
+  				emailjs.init('user_vjsbDCAS3adFucEgGwZMQ')
+
+			</script>
+			<script>const btn = document.getElementById('button');
+
+  				document.getElementById('form')
+   					.addEventListener('submit', function(event) {
+     					event.preventDefault();
+  
+     					btn.value = 'Sending...';
+  
+     					const serviceID = 'default_service';
+     					const templateID = 'contact_form';
+  
+     					emailjs.sendForm(serviceID, templateID, this)
+      					.then(() => {
+       						 btn.value = 'Send Email';
+       						 alert('Sent!');
+      					}, (err) => {
+        					btn.value = 'Send Email';
+        					alert(JSON.stringify(err));
+      					});
+  				});</script>
 
             <!-- contact-warning -->
-            <div id="message-warning">            	
+            <!--<div id="message-warning">            	
             </div>            
-            <!-- contact-success -->
-      		<div id="message-success">
+             contact-success -->
+      		<!--<div id="message-success">
                <i class="fa fa-check"></i>Your message was sent, thank you!<br>
-      		</div>
+      		</div>-->
 
          </div> <!-- /col-twelve -->
    		
